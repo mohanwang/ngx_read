@@ -19,37 +19,37 @@
  *    TT        command type, i.e. HTTP "location" or "server" command
  */
 
-#define NGX_CONF_NOARGS      0x00000001
-#define NGX_CONF_TAKE1       0x00000002
-#define NGX_CONF_TAKE2       0x00000004
-#define NGX_CONF_TAKE3       0x00000008
-#define NGX_CONF_TAKE4       0x00000010
-#define NGX_CONF_TAKE5       0x00000020
-#define NGX_CONF_TAKE6       0x00000040
-#define NGX_CONF_TAKE7       0x00000080
+#define NGX_CONF_NOARGS      0x00000001 // 无参数
+#define NGX_CONF_TAKE1       0x00000002 // 取1个参数
+#define NGX_CONF_TAKE2       0x00000004 // 取2个参数
+#define NGX_CONF_TAKE3       0x00000008 // 取3个参数
+#define NGX_CONF_TAKE4       0x00000010 // 取4个参数
+#define NGX_CONF_TAKE5       0x00000020 // 取5个参数
+#define NGX_CONF_TAKE6       0x00000040 // 取6个参数
+#define NGX_CONF_TAKE7       0x00000080 // 取7个参数
 
-#define NGX_CONF_MAX_ARGS    8
+#define NGX_CONF_MAX_ARGS    8 // 最多8个参数
 
-#define NGX_CONF_TAKE12      (NGX_CONF_TAKE1|NGX_CONF_TAKE2)
-#define NGX_CONF_TAKE13      (NGX_CONF_TAKE1|NGX_CONF_TAKE3)
+#define NGX_CONF_TAKE12      (NGX_CONF_TAKE1|NGX_CONF_TAKE2) // 取1个或2个参数
+#define NGX_CONF_TAKE13      (NGX_CONF_TAKE1|NGX_CONF_TAKE3) // 取1个或3个参数
 
-#define NGX_CONF_TAKE23      (NGX_CONF_TAKE2|NGX_CONF_TAKE3)
+#define NGX_CONF_TAKE23      (NGX_CONF_TAKE2|NGX_CONF_TAKE3) // 取2个或3个参数
 
-#define NGX_CONF_TAKE123     (NGX_CONF_TAKE1|NGX_CONF_TAKE2|NGX_CONF_TAKE3)
+#define NGX_CONF_TAKE123     (NGX_CONF_TAKE1|NGX_CONF_TAKE2|NGX_CONF_TAKE3) // 取1个或2个或3个参数
 #define NGX_CONF_TAKE1234    (NGX_CONF_TAKE1|NGX_CONF_TAKE2|NGX_CONF_TAKE3   \
-                              |NGX_CONF_TAKE4)
+                              |NGX_CONF_TAKE4) // 取1个或2个或3个或4个参数
 
-#define NGX_CONF_ARGS_NUMBER 0x000000ff
-#define NGX_CONF_BLOCK       0x00000100
-#define NGX_CONF_FLAG        0x00000200
-#define NGX_CONF_ANY         0x00000400
-#define NGX_CONF_1MORE       0x00000800
-#define NGX_CONF_2MORE       0x00001000
+#define NGX_CONF_ARGS_NUMBER 0x000000ff // 指令参数个数
+#define NGX_CONF_BLOCK       0x00000100 // 块类配置项
+#define NGX_CONF_FLAG        0x00000200 // 标志类配置项，即布尔值配置项 on off
+#define NGX_CONF_ANY         0x00000400 // 任意类配置项
+#define NGX_CONF_1MORE       0x00000800 // 1个或多个参数
+#define NGX_CONF_2MORE       0x00001000 // 2个或多个参数
 
-#define NGX_DIRECT_CONF      0x00010000
+#define NGX_DIRECT_CONF      0x00010000 // 直接配置项, 无需分配内存
 
-#define NGX_MAIN_CONF        0x01000000
-#define NGX_ANY_CONF         0x1F000000
+#define NGX_MAIN_CONF        0x01000000 // 主配置项
+#define NGX_ANY_CONF         0x1F000000 // 任意配置项
 
 
 
@@ -75,12 +75,12 @@
 
 
 struct ngx_command_s {
-    ngx_str_t             name;
-    ngx_uint_t            type;
-    char               *(*set)(ngx_conf_t *cf, ngx_command_t *cmd, void *conf);
-    ngx_uint_t            conf;
-    ngx_uint_t            offset;
-    void                 *post;
+    ngx_str_t             name; // 指令名称
+    ngx_uint_t            type; // 指令类型
+    char               *(*set)(ngx_conf_t *cf, ngx_command_t *cmd, void *conf); // 指令处理函数
+    ngx_uint_t            conf; // 指令配置项
+    ngx_uint_t            offset; // 指令偏移量
+    void                 *post; // 指令后处理函数
 };
 
 #define ngx_null_command  { ngx_null_string, 0, NULL, 0, 0, NULL }

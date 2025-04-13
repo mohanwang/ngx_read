@@ -66,7 +66,7 @@ struct ngx_cycle_s {
     ngx_list_t                open_files;
     ngx_list_t                shared_memory;
 
-    ngx_uint_t                connection_n;
+    ngx_uint_t                connection_n; // 每个worker最大连接数
     ngx_uint_t                files_n;
 
     ngx_connection_t         *connections;
@@ -85,36 +85,36 @@ struct ngx_cycle_s {
 
 
 typedef struct {
-    ngx_flag_t                daemon;
-    ngx_flag_t                master;
+    ngx_flag_t                daemon; // 是否以守护进程运行
+    ngx_flag_t                master; // 是否为主进程
 
-    ngx_msec_t                timer_resolution;
-    ngx_msec_t                shutdown_timeout;
+    ngx_msec_t                timer_resolution; // 定时器分辨率
+    ngx_msec_t                shutdown_timeout; // 关闭超时时间
 
-    ngx_int_t                 worker_processes;
-    ngx_int_t                 debug_points;
+    ngx_int_t                 worker_processes; // worker进程数
+    ngx_int_t                 debug_points; // 调试点
 
-    ngx_int_t                 rlimit_nofile;
-    off_t                     rlimit_core;
+    ngx_int_t                 rlimit_nofile; // 文件描述符限制数
+    off_t                     rlimit_core; // 核心转储文件大小
 
-    int                       priority;
+    int                       priority; // 优先级
 
-    ngx_uint_t                cpu_affinity_auto;
-    ngx_uint_t                cpu_affinity_n;
-    ngx_cpuset_t             *cpu_affinity;
+    ngx_uint_t                cpu_affinity_auto; // 是否自动设置CPU亲和性
+    ngx_uint_t                cpu_affinity_n; // CPU亲和性数量
+    ngx_cpuset_t             *cpu_affinity; // CPU亲和性
 
-    char                     *username;
-    ngx_uid_t                 user;
-    ngx_gid_t                 group;
+    char                     *username; // 用户名
+    ngx_uid_t                 user; // 用户ID
+    ngx_gid_t                 group; // 组ID
 
-    ngx_str_t                 working_directory;
-    ngx_str_t                 lock_file;
+    ngx_str_t                 working_directory; // 工作目录
+    ngx_str_t                 lock_file; // 锁文件
 
-    ngx_str_t                 pid;
-    ngx_str_t                 oldpid;
+    ngx_str_t                 pid; // pid文件
+    ngx_str_t                 oldpid; // 旧pid文件
 
-    ngx_array_t               env;
-    char                    **environment;
+    ngx_array_t               env; // 环境变量
+    char                    **environment; // 环境变量
 
     ngx_uint_t                transparent;  /* unsigned  transparent:1; */
 } ngx_core_conf_t;
